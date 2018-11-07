@@ -24,7 +24,7 @@ import unittest
 
 TEST_CONFIG_RECORDER = os.path.realpath("./recorder/RecorderAgent.cfg")
 TEST_REPLAY_DIRECTORY = os.path.realpath("./tests/replays")
-TEST_AGENT_PATH = os.path.realpath("./agents/legacy.py")
+TEST_AGENT_PATH = os.path.realpath("./agents/legacy.cfg")
 
 class Test_Replayer(unittest.TestCase):
 	def generate_replay(file_path, dao_class, length=600):
@@ -179,12 +179,12 @@ class IntergrationTests(unittest.TestCase):
 
 		replayer = Base_Replayer(dao)
 		replayer.set_files_list(replay_path)
-		agent_class = replayer.import_agent("./recorder/RecorderAgent.py")
+		agent_packet = replayer.import_agent("./recorder/RecorderAgent.cfg")
 		agent = None
 
 		for batch in replayer.batch(n=50):
 			if agent is None:
-				agent = replayer.init_agent(agent_class)
+				agent = replayer.init_agent(agent_packet)
 
 			#### you decide your code here
 			for b in batch:

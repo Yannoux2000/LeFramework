@@ -7,6 +7,7 @@ import os
 from DAOs import *
 from rlbot.parsing.custom_config import *
 from rlbot.utils.class_importer import *
+from rlbot.agents.base_agent import BaseAgent, PYTHON_FILE_KEY, LOOKS_CONFIG_KEY, BOT_NAME_KEY, BOT_CONFIG_MODULE_HEADER, BOT_CONFIG_AGENT_HEADER
 
 REPLAYER_CONFIG_HEADER = "Replayer Configuration"
 CUSTOM_CONFIG_HEADER = "Custom Configuration"
@@ -20,6 +21,8 @@ class Base_Replayer:
 		self.reloop = reloop
 		self.infoframe = None
 
+		self.agent_config = None
+
 	def init_agent(self, cls_agent):
 
 		if self.infoframe is None:
@@ -27,7 +30,7 @@ class Base_Replayer:
 
 		a = cls_agent(*self.infoframe.init)
 		#TODO
-		a.load_config(config.get_header(BOT_CONFIG_AGENT_HEADER))
+		a.load_config(self.agent_config.get_header(BOT_CONFIG_AGENT_HEADER))
 		
 		a._register_field_info(lambda: self.field_info())
 		
@@ -43,12 +46,24 @@ class Base_Replayer:
 			raise TypeError("You must init your agents in the for batch loop\n")
 		return self.infoframe.field_info
 
-	def import_agent(self, agent_path):
+	def import_agent(self, config_path):
 		"""
 		does not init the agent class. only returns it using rlbot framework
 		:return: the agent class
 		"""
-		return import_agent(agent_path).get_loaded_class()
+
+		self.agent_config = BaseAgent.base_create_agent_configurations()
+		self.agent_config.parse_file(config_path)
+
+		agent_python_file = self.agent_config.get(BOT_CONFIG_MODULE_HEADER, PYTHON_FILE_KEY)
+
+		config_dir = '/'.join(config_path.split('/')[:-1])
+		python_path = os.path.join(config_dir, agent_python_file)
+		agent_class = import_agent(python_path).get_loaded_class()
+
+		self.agent_config = agent_class.base_create_agent_configurations()
+		self.agent_config.parse_file(config_path)
+		return agent_class
 
 
 	def set_files_list(self, replay_path):

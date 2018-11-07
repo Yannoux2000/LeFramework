@@ -54,7 +54,7 @@ class RecorderAgent(BaseAgent):
 		params.add_value('replay_path', str, default='./tests/replays', description='directory where the replays will be saved.')
 		params.add_value('agent_path', str, default='./agents/legacy.py', description='python file containing the agent class')
 		params.add_value('data_format', str, default='BINDao', description="Dao name for the data format you want \n(BINDao for Binary, JSONDao for Json XMLDao for Xml, ...)")
-		params.add_value('max_frames', int, default=-1, description="Number of steps in onefile, -1 means one file for one replay")
+		params.add_value('max_frames', int, default=-1, description="Number of steps in onefile, -1 means one file for one replay\nthis might be resource intensive")
 
 	def load_config(self, config_header):
 		"""
