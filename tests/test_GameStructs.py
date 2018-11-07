@@ -164,7 +164,7 @@ class GoalInfo:
 		self.direction = direction
 
 class FieldInfoPacket:
-	def __init__(self):
+	def __init__(self, boost_pads = [], goals = []):
 		self.update(boost_pads, goals)
 
 	def update(self, boost_pads = [], goals = []):
@@ -172,6 +172,10 @@ class FieldInfoPacket:
 		self.num_boosts = len(boost_pads)
 		self.goals = goals
 		self.num_goals = len(goals)
+
+	@staticmethod
+	def make():
+		return FieldInfoPacket([BoostPad(Vector3(0,0,0))], [GoalInfo(0,Vector3(-5000,0,50),Vector3(1,0,0)),GoalInfo(0,Vector3(5000,0,50),Vector3(-1,0,0))])
 
 class GameTickPacket:
 	def __init__(self, game_cars = [], game_boosts = [], game_ball = BallInfo(), game_info = GameInfo(), dropshot_tiles = []):

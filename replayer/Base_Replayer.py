@@ -18,53 +18,53 @@ class Base_Replayer:
 		"""
 		self.dao = dao
 		self.reloop = reloop
+		self.infoframe = None
+
+	def init_agent(self, cls_agent):
+
+		if self.infoframe is None:
+			raise Error("Replay without an info frame")
+
+		a = cls_agent(*self.infoframe.init)
+		#TODO
+		a.load_config(config.get_header(BOT_CONFIG_AGENT_HEADER))
+		
+		a._register_field_info(lambda: self.field_info())
+		
+		a._register_quick_chat(lambda *args: None)
+		a._register_set_game_state(lambda *args: None)
+		a._register_ball_prediction(lambda *args: None)
+
+		a.initialize_agent()
+		return a
+
+	def field_info(self):
+		if self.infoframe is None:
+			raise TypeError("You must init your agents in the for batch loop\n")
+		return self.infoframe.field_info
 
 	def import_agent(self, agent_path):
 		"""
-		this class does not import the agent class. but you can do so by calling this function
+		does not init the agent class. only returns it using rlbot framework
 		:return: the agent class
 		"""
-		return import_agent().get_loaded_class()
+		return import_agent(agent_path).get_loaded_class()
 
-
-	# def load_custom_config(self, config_header):
-	# 	"""
-	# 	this method is free for you to implement for inheriting classes
-	# 	"""
-	# 	pass
-
-	# @staticmethod
-	# def create_configurations(config: ConfigObject):
-	# 	base_header = config.add_header_name(REPLAYER_CONFIG_HEADER)
-	# 	base_header.add_value('data_format', str, default='', description="Dao name for the data format you want (BINDao for Binary, JSONDao for Json XMLDao for Xml, ...)")
-	# 	base_header.add_value('reloop', bool, default='False', description="should the data be read over and over")
-	# 	return config
-
-	# def load_config(self, file_path):
-	# 	"""
-	# 	Loads a file_path this is called after the constructor but before anything.
-	# 	:param file_path: This is the config file's path, for replayer configuration.
-	# 	"""
-	# 	# config = self.create_configurations(ConfigObject())
-	# 	config = ConfigObject()
-	# 	#to create a file if it was not created already
-	# 	config.parse_file(file_path, max_index=10)
-
-	# 	self.load_custom_config(config.add_header_name(CUSTOM_CONFIG_HEADER))
-	# 	base_header = config.get_header(REPLAYER_CONFIG_HEADER)
-	# 	self.dao = select(base_header.get('data_format'))
-	# 	self.reloop = base_header.getboolean('reloop')
 
 	def set_files_list(self, replay_path):
 		"""
 		define path to replay, accepts file path, or directory, (including subdirectories)
 		"""
+		files_list = []
+
 		if os.path.isdir(replay_path):
-			self.files_list = [os.path.join(replay_path, f) for f in os.listdir(replay_path) if self.dao.is_format(f)]
+			files_list = [os.path.join(replay_path, f) for f in os.listdir(replay_path)]
 
 		if os.path.isfile(replay_path):
-			self.files_list = [replay_path] if self.dao.is_format(replay_path) else []
+			files_list = [replay_path]
 
+		#Keep only the readable by the dao
+		self.files_list = self.dao.filter(files_list)
 		#creates a generator that get through all lines of each files
 		self.replay = self.file_extractor()
 
@@ -74,11 +74,12 @@ class Base_Replayer:
 		also saves fields_info if there are one
 		:yield: line wise decoded data
 		"""
-		for data in (self.dao.read(l) for f in self.files_list for l in open(f, self.dao.m_read)):
-			if data.f_index == -1:
-				self.field_info = data
-			else:
-				yield data
+		for data in (self.dao.f_read(f) for f in self.files_list):
+			for frame in data:
+				if frame.f_index == -1:
+					self.infoframe = frame
+				else:
+					yield frame
 
 	def batch(self, n=1):
 		"""
