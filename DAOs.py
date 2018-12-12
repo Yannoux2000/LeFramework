@@ -7,10 +7,17 @@ import json
 import pickle
 
 #for xml
-from lxml.etree import tostring
-from lxml import objectify
+# from lxml.etree import tostring
+# from lxml import objectify
 
 import re
+
+def Frame(game_tick_packet, controller, f_index):
+	return {"game_tick_packet": game_tick_packet, "controller": controller, "f_index": f_index}
+
+def Info(info, init):
+	return {"field_info" : info, "init" : init,"f_index" : -1}
+
 def select(dirty_name):
 	"""
 	select a DAO class that correspond to the name
@@ -27,6 +34,7 @@ def select(dirty_name):
 
 	raise NameError("DAO's name is not defined")
 
+#the dao classes are used to manage different replay format, either in reading than in writing
 class BaseDao():
 	r_mode = "r"
 	w_mode = "w"
@@ -114,10 +122,17 @@ class BINDao(BaseDao):
 class JSONDao(BaseDao):
 	ext = "json"
 	def read(origin = None):
-		return json.load(origin, object_hook=JSONDao._json_object_hook)
-
+		return json.load(origin)
+		#, object_hook=JSONDao._json_object_hook
 	def write(data_obj, origin = None):
-		return json.dump(data_obj, origin, default=lambda data_obj: data_obj.__dict__)
+		return json.dump(data_obj, origin, default=JSONDao._obj_to_dict)
+
+	def _obj_to_dict(obj):
+		import ctypes
+		if isinstance(obj, ctypes.Structure):
+			return dict((field, getattr(obj, field)) for field, _ in obj._fields_)
+		else:
+			return obj.__dict__
 
 	def _json_object_hook(data):
 		return namedtuple('X', data.keys())(*data.values())
