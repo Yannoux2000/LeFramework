@@ -1,9 +1,5 @@
-# RLbotRecords
-This Repo main purpose is to serve as a supervised trainer, for machine learning models, in rlbot.
+# LeFramework
+This Repo main purpose is to serve as a baseline for any fellow french men who wants to make bots with RLBot.
 
 # How to use:
-## To record:
-
-_only the files in Recorder are used to record_
-
-To record a bot, all you would need to do, would be to complete the config file in the Recorder directory. follow the steps used to create rlbot agent's configurations files. In the configuration files, the python class to input inside RLRecorderAgent.py
+import this repo as a submodule
