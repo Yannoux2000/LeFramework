@@ -1,8 +1,8 @@
-from LeFramework.common.Vector import *
-from LeFramework.common.ConstVec import *
-from LeFramework.common.Objs import *
-from LeFramework.common.Paths import *
-from LeFramework.common.Areas import *
+from .vector import *
+from .const_vec import *
+from .objs import *
+from .paths import *
+from .areas import *
 
 import sys
 import os

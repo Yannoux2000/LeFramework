@@ -1,6 +1,6 @@
-from .Vector import *
-from .Objs import *
-from .Paths import *
+from .vector import *
+from .objs import *
+from .paths import *
 
 from random import uniform
 

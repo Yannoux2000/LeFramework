@@ -6,7 +6,7 @@ from rlbot.utils.class_importer import *
 from datetime import datetime
 
 from .Recorder import Recorder
-from LeFramework.DAOs import select, Info, Frame
+from LeFramework.daos import select, Info, Frame
 
 #### DO NOT MODIFY
 class RecorderAgent(BaseAgent):

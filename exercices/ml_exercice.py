@@ -1,7 +1,7 @@
 from .base_exercice import BaseExercice
 
-from LeFramework.common.Objs import *
-from LeFramework.common.Regulators import Timer
+from LeFramework.common.objs import *
+from LeFramework.common.regulators import Timer
 
 from rlbot.utils.structures.game_data_struct import GameTickPacket
 

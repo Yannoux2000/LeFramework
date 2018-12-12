@@ -1,7 +1,7 @@
 import unittest
-from ._tests.test_RLReplays import *
-from ._tests.test_Exercices import *
-from ._tests.test_Vector import *
+from ._tests.test_rl_replays import *
+from ._tests.test_exercices import *
+from ._tests.test_vector import *
 
 """LeFramework unittests"""
 

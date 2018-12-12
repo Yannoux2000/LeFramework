@@ -3,8 +3,8 @@ import numpy as np
 from rlbot.utils.structures.game_data_struct import GameTickPacket
 from rlbot.utils.game_state_util import GameState, BallState, CarState, Physics, Vector3, Rotator
 
-from LeFramework.common.Objs import *
-from LeFramework.common.Regulators import Timer
+from LeFramework.common.objs import *
+from LeFramework.common.regulators import Timer
 
 class BaseExercice():
 	DEFAULT = -1

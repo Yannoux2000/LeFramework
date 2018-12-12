@@ -1,5 +1,5 @@
-from .replayers.Base_Replayer import Base_Replayer
-from .DAOs import select, BINDao
+from .replayers.base_replayer import Base_Replayer
+from .daos import select, BINDao
 
 """This file serves as an example to use the Base_Replayer class"""
 

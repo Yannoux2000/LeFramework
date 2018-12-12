@@ -1,5 +1,5 @@
-from LeFramework.exercices.BaseExercice import BaseExercice
-from LeFramework._tests.test_GameStructs import GameTickPacket, SimpleControllerState, FieldInfoPacket
+from LeFramework.exercices.base_exercice import BaseExercice
+from LeFramework._tests.test_game_structs import GameTickPacket, SimpleControllerState, FieldInfoPacket
 
 from rlbot.utils.game_state_util import GameState
 

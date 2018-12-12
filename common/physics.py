@@ -1,6 +1,6 @@
 import numpy as np
-from .Vector import *
-from .Objs import *
+from .vector import *
+from .objs import *
 
 #inputs are vectors
 def bounce(ball_pos, ball_vel, ball_avl, normal):

@@ -1,5 +1,5 @@
 import numpy as np
-from .Vector import *
+from .vector import *
 
 #distance Between Physicalects only, no mixing vectors and Physicalects
 

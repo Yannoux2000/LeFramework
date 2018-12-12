@@ -1,8 +1,8 @@
-from LeFramework.common.Vector import *
-from LeFramework.common.ConstVec import *
-from LeFramework.common.Objs import *
-from LeFramework.common.Paths import *
-from LeFramework.common.Areas import *
+from LeFramework.common.vector import *
+from LeFramework.common.const_vec import *
+from LeFramework.common.objs import *
+from LeFramework.common.paths import *
+from LeFramework.common.areas import *
 
 from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from rlbot.utils.structures.game_data_struct import GameTickPacket

@@ -1,6 +1,6 @@
-from .Vector import *
-from .Objs import *
-from .ConstVec import *
+from .vector import *
+from .objs import *
+from .const_vec import *
 
 class Line():
 

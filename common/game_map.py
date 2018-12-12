@@ -1,6 +1,6 @@
 import numpy as np
-from .Vector import *
-from .Objs import *
+from .vector import *
+from .objs import *
 
 # class BoostPad(ctypes.Structure):
 #     _fields_ = [("location", Vector3),

@@ -1,5 +1,3 @@
-
-
 class BaseReward(object):
 	def __init__(self):
 		pass
@@ -7,8 +5,8 @@ class BaseReward(object):
 	def __call__(self, packet):
 		raise NotImplementedError()
 
-from LeFramework.common.Objs import Car, Ball
-from LeFramework.common.Regulators import Timer
+from LeFramework.common.objs import Car, Ball
+from LeFramework.common.regulators import Timer
 
 class DistanceReward(BaseReward):
 	def __init__(self, distance = 500):

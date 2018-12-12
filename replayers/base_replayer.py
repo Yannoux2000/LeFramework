@@ -5,7 +5,7 @@ so that, ML agent can be set as training mode, and therefore train in head less 
 
 import os
 
-from LeFramework.DAOs import *
+from LeFramework.daos import *
 
 from rlbot.parsing.custom_config import *
 from rlbot.utils.class_importer import *

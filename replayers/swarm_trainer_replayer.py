@@ -1,5 +1,5 @@
-from LeFramework.replayers.Base_Replayer import Base_Replayer
-from LeFramework.DAOs import select, BINDao
+from LeFramework.replayers.base_replayer import Base_Replayer
+from LeFramework.daos import select, BINDao
 import multiprocessing
 
 def example_replay(agent_config, replay_dir="./replays", dao=BINDao, n=100):

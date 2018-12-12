@@ -3,10 +3,10 @@ This file is only used for debuging and testing
 """
 import os
 
-from LeFramework.DAOs import *
-from LeFramework.recorders.RecorderAgent import *
-from LeFramework.replayers.Base_Replayer import *
-from LeFramework._tests.test_GameStructs import GameTickPacket, SimpleControllerState, FieldInfoPacket
+from LeFramework.daos import *
+from LeFramework.recorders.recorder_agent import *
+from LeFramework.replayers.base_replayer import *
+from LeFramework._tests.test_game_structs import GameTickPacket, SimpleControllerState, FieldInfoPacket
 
 from rlbot.agents.base_agent import BaseAgent, BOT_CONFIG_AGENT_HEADER
 

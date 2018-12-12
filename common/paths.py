@@ -1,5 +1,5 @@
-from .Objs import *
-from .ConstVec import *
+from .objs import *
+from .const_vec import *
 
 class Node(Target):
 	def __init__(self, vec = [0,0,0]):

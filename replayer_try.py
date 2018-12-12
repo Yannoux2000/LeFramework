@@ -7,8 +7,8 @@ Most of the configurations can be made in the function's parameters
 MAY NOT BE UP TO DATE
 
 """
-from replayers.Base_Replayer import Base_Replayer
-from DAOs import select, BINDao
+from replayers.base_replayer import Base_Replayer
+from daos import select, BINDao
 
 # example_replay("./agents/legacy.cfg", "./tests/replays", select("BINDao"), n=200)
 def example_replay(agent_config, replay_dir="./replays", dao=BINDao, n=100):

@@ -1,4 +1,4 @@
-from LeFramework.DAOs import select, Info, Frame
+from LeFramework.daos import select, Info, Frame
 
 from datetime import datetime
 
