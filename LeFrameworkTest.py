@@ -1,5 +1,4 @@
 import unittest
-from ._tests.test_rl_replays import *
 from ._tests.test_exercices import *
 from ._tests.test_vector import *
 
